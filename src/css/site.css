@@ -1,0 +1,50 @@
+.inputSearch {
+  text-align: center;
+  margin-top: -20px;
+  display: inline-block;
+  width: 100%;
+  padding: 20px;
+  font-size: 20pt;
+  font-weight: bold;
+}
+
+.red { color: red; }
+.black { color: black; }
+.hidden { display: none;  }
+
+#lang {
+  width: 200px;
+  margin-right: 20px;
+  font-size: 15pt;
+}
+
+.resultGroup {
+  padding:15px;
+  margin-left: 10px;
+  background-color: rgb(255, 254, 254);
+}
+
+.resultGroup:hover {
+  background-color: rgba(84, 117, 209, 0.055);
+}
+
+.resultTitle {
+  color: rgba(4, 106, 238, 0.829);
+  font-size: 14pt;
+}
+
+
+.resultTitle:hover {
+  color: rgba(4, 41, 90, 0.829);
+  font-size: 14pt;
+}
+
+.resultUrl {
+  color: green;
+  font-size: 9pt;
+}
+
+.resultSnippet {
+  color: rgb(70, 69, 69);
+  font-size: 11pt;
+}

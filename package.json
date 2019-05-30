@@ -1,0 +1,15 @@
+{
+  "name": "azure-speach-demo",
+  "version": "1.0.0",
+  "description": "Azure Speech Demo",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node_modules/.bin/http-server src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hattan Shobokshi",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
