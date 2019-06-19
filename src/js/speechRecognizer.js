@@ -18,9 +18,10 @@ const SpeechRecognizer = (function () {
     audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
   }
 
-  SpeechRecognizer.prototype.Recognize = function (language) {
+  SpeechRecognizer.prototype.Recognize = function (language,recognizingCallBack) {
     speechConfig.speechRecognitionLanguage = language;
     recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
+    recognizer.recognizing = recognizingCallBack;
     return new Promise(function (resolve, reject) {
       recognizer.recognizeOnceAsync(
         function (result) {
