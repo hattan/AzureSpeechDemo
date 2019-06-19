@@ -15,47 +15,49 @@ const bingSearch = new BingSearch(env.bingSearchKey);
 const speechRecognizer = new SpeechRecognizer(env.speechKey, env.speechRegion);
 
 /* Demo App */
-function main(){
+function main() {
   btn.addEventListener("click", startVoiceSearch);
-  phraseDiv.addEventListener('keydown',startTypingSearch); 
+  phraseDiv.addEventListener('keydown', startTypingSearch);
 }
 
-function startTypingSearch(e){
+function startTypingSearch(e) {
   resultsContainer.innerHTML = '';
   let selectedLanguage = lang[lang.selectedIndex].value;
-  if(e.keyCode == ENTER_KEY){
+  if (e.keyCode == ENTER_KEY) {
     resultsContainer.innerHTML = '';
-    performBingSearch(phraseDiv.value,selectedLanguage);
+    performBingSearch(phraseDiv.value, selectedLanguage);
   }
 }
 
-function startVoiceSearch(){
+function startVoiceSearch() {
   phraseDiv.value = "";
   resultsContainer.innerHTML = '';
   btn.classList.add('red');
   let selectedLanguage = lang[lang.selectedIndex].value;
-  
-  speechRecognizer.Recognize(selectedLanguage)
-    .then(async function (result) {
-      phraseDiv.value += result.text;
-      btn.classList.remove('red');
-      performBingSearch(phraseDiv.value,selectedLanguage);           
-    });
+
+  speechRecognizer.Recognize(selectedLanguage, (s, e) => {
+    let word = e.result.text;
+    phraseDiv.value = word;
+  })
+  .then(async function (result) {
+    btn.classList.remove('red');
+    performBingSearch(phraseDiv.value, selectedLanguage);
+  });
 }
 
-function createSnippetFromTemplate(item){
+function createSnippetFromTemplate(item) {
   return template.replace("{{name}}", item.name).replace("{{snippet}}", item.snippet).replace("{{url}}", item.url)
 }
 
-function performBingSearch(searchTerm,selectedLanguage){
+function performBingSearch(searchTerm, selectedLanguage) {
   mainContent.classList.add('hidden');
   bingSearch.Search(searchTerm, selectedLanguage)
-            .then(function(results){
-              resultsContainer.classList.remove("hidden");
-              resultsContainer.innerHTML = results.reduce(function (accum,item) {
-                return accum + createSnippetFromTemplate(item);
-              },'');;                              
-            });   
+    .then(function (results) {
+      resultsContainer.classList.remove("hidden");
+      resultsContainer.innerHTML = results.reduce(function (accum, item) {
+        return accum + createSnippetFromTemplate(item);
+      }, '');;
+    });
 }
 
 document.addEventListener("DOMContentLoaded", main);
